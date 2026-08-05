@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProjectCard from "../components/project/ProjectCard";
+import ProjectForm from "../components/project/ProjectForm";
 
 const projectsData = [
   {
@@ -51,10 +52,26 @@ const DashboardPage = () => {
       })
     )
   }
-  
+
+  const handleAddProject = (project: string) => {
+
+    const newProject = {
+      id: Date.now(),
+      name: project,
+      status: "Not Started"
+    }
+
+    setProjects([
+      ...projects,
+      newProject
+    ])
+  }
+
   return (
     <>
       <h1>Dashboard</h1>
+      <ProjectForm handleAddProject={handleAddProject} />
+
       {projects.map( project => (
 
         <ProjectCard 
