@@ -1,5 +1,7 @@
+import { useState } from "react";
 import ProjectCard from "../components/project/ProjectCard";
-const projects = [
+
+const projectsData = [
   {
     id: 1,
     name: "React Migration",
@@ -22,13 +24,46 @@ const projects = [
   },
 ];
 
+interface Project {
+  id: number;
+  name: string;
+  status: string;
+}
+
+
 const DashboardPage = () => {
+
+  const [projects, setProjects] = useState<Project[]>(projectsData);
+
+
+  const handleStatus = (id: number) => {
+
+    setProjects(
+      projects.map(project => {
+        if (project.id === id){
+          return {
+            ...project,
+            status: "Completed"
+          }
+        }
+
+        return project;
+      })
+    )
+  }
+  
   return (
     <>
       <h1>Dashboard</h1>
       {projects.map( project => (
 
-        <ProjectCard key={project.id} name={project.name} status={project.status} />
+        <ProjectCard 
+          key={project.id} 
+          id={project.id}
+          name={project.name} 
+          status={project.status} 
+          handleStatus={handleStatus}
+        />
       ))
       }
     </>
