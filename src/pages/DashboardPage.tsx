@@ -67,6 +67,13 @@ const DashboardPage = () => {
     ])
   }
 
+  const handleDeleteProject = (id: number) => {
+
+    setProjects(
+      projects.filter((project) => project.id !== id)
+    )
+  }
+
   return (
     <>
       <h1>Dashboard</h1>
@@ -80,6 +87,7 @@ const DashboardPage = () => {
           name={project.name} 
           status={project.status} 
           handleStatus={handleStatus}
+          handleDeleteProject={handleDeleteProject}
         />
       ))
       }

@@ -3,14 +3,25 @@ interface ProjectCardProps {
     name: string;
     status: string;
     handleStatus: (id: number) => void;
+    handleDeleteProject: (id: number) => void
 }
 
-const ProjectCard = ({id, name, status, handleStatus}: ProjectCardProps) => {
+const ProjectCard = ({
+    id, 
+    name, 
+    status, 
+    handleStatus, 
+    handleDeleteProject
+  }: ProjectCardProps) => {
 
   const isCompleted = status === "Completed";
   
   const handleClick = () => {
     handleStatus(id);
+  }
+
+  const handleDelete = () => {
+    handleDeleteProject(id);
   }
 
   return (
@@ -23,6 +34,7 @@ const ProjectCard = ({id, name, status, handleStatus}: ProjectCardProps) => {
       >
         Set complete
       </button>
+      <button onClick={handleDelete}>Delete</button>
     </>
   );
 };
