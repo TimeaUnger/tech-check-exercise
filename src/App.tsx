@@ -3,6 +3,7 @@ import DashboardPage from "./pages/DashboardPage";
 import LoginPage from "./pages/LoginPage";
 import MainLayout from "./layouts/MainLayout";
 import ProjectPage from "./pages/ProjectsPage";
+import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 
 function App() {
   return (
@@ -17,6 +18,11 @@ function App() {
           path="projects"
           element={<ProjectPage />}
         />
+        <Route 
+          path="projects/:id"
+          element={<ProjectDetailsPage />}
+        />
+
       </Route>
 
       <Route 

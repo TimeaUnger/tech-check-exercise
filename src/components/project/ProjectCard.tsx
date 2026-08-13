@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 interface ProjectCardProps {
     id: number;
     name: string;
     status: string;
     handleStatus: (id: number) => void;
-    handleDeleteProject: (id: number) => void
+    handleDeleteProject: (id: number) => void;
 }
 
 const ProjectCard = ({
@@ -26,7 +28,11 @@ const ProjectCard = ({
 
   return (
     <>
-      <h2>{name}</h2>
+      <h2>
+        <Link to={`projects/${id}`}>
+          {name}
+        </Link>
+      </h2>
       <p>{status}</p>
       <button 
         onClick={handleClick} 

@@ -1,0 +1,76 @@
+const projectsData = [
+  {
+    id: 1,
+    name: "React Migration",
+    description:
+      "Migrate the legacy application to React 19 and TypeScript.",
+    status: "In Progress",
+    priority: "High",
+    owner: "John Doe",
+    deadline: "2026-09-15",
+  },
+  {
+    id: 2,
+    name: "CRM Dashboard",
+    description:
+      "Develop a dashboard for managing customer relationships and analytics.",
+    status: "Not Started",
+    priority: "Medium",
+    owner: "Jane Smith",
+    deadline: "2026-10-10",
+  },
+  {
+    id: 3,
+    name: "Inventory Management",
+    description:
+      "Create an inventory tracking system with stock notifications.",
+    status: "Completed",
+    priority: "High",
+    owner: "Michael Brown",
+    deadline: "2026-07-20",
+  },
+  {
+    id: 4,
+    name: "Mobile Banking App",
+    description:
+      "Build a secure mobile banking application with authentication.",
+    status: "In Progress",
+    priority: "High",
+    owner: "Emily Johnson",
+    deadline: "2026-11-01",
+  },
+  {
+    id: 5,
+    name: "Weather Forecast App",
+    description:
+      "Create a weather application using a public REST API.",
+    status: "Not Started",
+    priority: "Low",
+    owner: "David Wilson",
+    deadline: "2026-12-05",
+  },
+];
+
+interface Project {
+     id: number;
+     name: string;
+     status: "Not Started" | "In Progress" | "Completed";
+     onDelete: (id: number) => void;
+}
+
+
+const ProjectCards = ({id, name, status, onDelete}: Project) => {
+
+    return (
+        
+            <>
+                <div >{name}</div>
+                <div >{status}</div>
+                <button onClick={() => onDelete(id)} >Delete</button>
+            </>
+
+    )
+
+}
+
+export default ProjectCards;
