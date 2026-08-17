@@ -1,0 +1,57 @@
+.contact-manager {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.search-box {
+  margin-bottom: 20px;
+}
+
+.search-box label,
+.contact-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.search-box input,
+.contact-form input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-card {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.contact-actions button,
+.contact-form button {
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.contact-form {
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+}
+
+.contact-form > div {
+  margin-bottom: 10px;
+}

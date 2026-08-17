@@ -2,18 +2,25 @@ import { NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
-    <header>
-      <div className="logo">Project Management</div>
+    <header className="app-header">
+      <div className="logo">Project Management System</div>
+
       <nav>
         <ul>
           <li>
-            <NavLink 
-                to="/"
-                className={({ isActive}) =>
-                  isActive ? "active" : ""
-                }
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : "")}
             >
-                Dashboard
+              Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/contacts"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Contacts
             </NavLink>
           </li>
           <li>Projects</li>
