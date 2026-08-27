@@ -1,92 +1,39 @@
 import { Link } from "react-router-dom";
 import type { Contact, ContactDetailsProps, Role } from "./types";
-import { useState, useLayoutEffect, useRef, useEffect } from "react";
+import { useState, useLayoutEffect, useRef } from "react";
+import useContact from "./hooks/useContact";
 
 const ContactDetails = ({ contactID }: ContactDetailsProps) => {
-  const [cardWidth, setCardWitdth] = useState<number>(0);
+  const [cardWidth, setCardWidth] = useState<number>(0);
   const cardRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [contactDetails, setContactDetails] = useState<Contact | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [editContact, setEditContact] = useState<Contact | null>(null);
+
+  const { contactDetails, loading, error, updateContact } =
+    useContact(contactID);
 
   useLayoutEffect(() => {
     if (!cardRef.current) return;
 
     const width = cardRef.current.getBoundingClientRect().width;
 
-    setCardWitdth(width);
+    setCardWidth(width);
   }, [contactDetails]);
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
+  const handleSaveContact = async () => {
 
-    const fetchContacts = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3001/contacts/${contactID}`,
-        );
+    if (!editContact) return;
 
-        if (!response.ok) {
-          throw new Error("Contact not found");
-        }
+    const updatedContact = await updateContact(editContact);
+    if (!updatedContact) return;
 
-        const data: Contact = await response.json();
-        localStorage.setItem("contact", JSON.stringify(data));
-
-        setContactDetails(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("Something went wrong");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchContacts();
-  }, [contactID]);
+    setEditContact(null);
+    setIsEditing(false);
+  };
 
   const handleEdit = () => {
     setIsEditing(true);
     setEditContact(contactDetails);
-  };
-
-  const handleSaveContact = async () => {
-    if (!editContact) return;
-
-    try {
-      const response = await fetch(
-        `http://localhost:3001/contacts/${contactID}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(editContact),
-        },
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to update contact");
-      }
-
-      const data: Contact = await response.json();
-      localStorage.setItem("contact", JSON.stringify(data));
-      setContactDetails(data);
-      setIsEditing(false);
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message);
-      } else {
-        setError("Something went wrong");
-      }
-    } finally {
-    }
   };
 
   const handleCancelEdit = () => {

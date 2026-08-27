@@ -8,16 +8,16 @@
       "role": "Developer"
     },
     {
-      "id": "LyDxtWhf0J8",
-      "name": "another",
-      "email": "another@email.com",
-      "favorite": true,
-      "role": "Desidger"
+      "id": "rqjJBzesJ4c",
+      "name": "teszt",
+      "email": "teszt@email.com",
+      "favorite": false,
+      "role": "Developer"
     },
     {
-      "id": "pA2v_FJYeQ0",
-      "name": "Tesztelrk",
-      "email": "teszt@email.com",
+      "id": "aqkEQLDvTWw",
+      "name": "TesztElek",
+      "email": "tesztmasik@email.com",
       "favorite": false,
       "role": "Manager"
     }
