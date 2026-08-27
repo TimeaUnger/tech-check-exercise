@@ -6,6 +6,7 @@ import MainLayout from "./layouts/MainLayout";
 import ProjectPage from "./pages/ContactManagerPage";
 import ProjectDetailsPage from "./pages/ProjectDetailsPage";
 import ContactManagerPage from "./pages/ContactManagerPage";
+import ContactDetailsPage from "./pages/ContactDetailsPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="projects/:id" element={<ProjectDetailsPage />} />
 
         <Route path="contacts" element={<ContactManagerPage />} />
+        <Route path="contacts/:id" element={<ContactDetailsPage />} />
       </Route>
 
       <Route path="/login" element={<LoginPage />} />

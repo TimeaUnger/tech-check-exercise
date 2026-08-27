@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { type ContactFormProps, type Contact } from "./types";
+import { type ContactFormProps, type Contact, type Role } from "./types";
 
 const ContactForm = ({ onAddContact }: ContactFormProps) => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [role, setRole] = useState<Role>("Developer");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,6 +17,7 @@ const ContactForm = ({ onAddContact }: ContactFormProps) => {
       name: name,
       email: email,
       favorite: false,
+      role: role
     };
 
     onAddContact(newContact);
@@ -36,6 +38,15 @@ const ContactForm = ({ onAddContact }: ContactFormProps) => {
       <div>
         <label>Email</label>
         <input value={email} onChange={(e) => setEmail(e.target.value)} />
+      </div>
+
+      <div>
+        <label>Role</label>
+        <select value={role} onChange={(e) => setRole(e.target.value as Role)}>
+          <option value="Devloper">Developer</option>
+          <option value="Desidger">Desidger</option>
+          <option value="Manager">Manager</option>
+        </select>
       </div>
 
       <button type="submit">Add Contact</button>

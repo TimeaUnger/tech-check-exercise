@@ -29,9 +29,12 @@
 }
 
 .contact-card {
+  width: 100%;
+  padding: 14px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding: 15px;
+  background-color: white;
+  box-sizing: border-box;
 }
 
 .contact-actions {
@@ -54,4 +57,138 @@
 
 .contact-form > div {
   margin-bottom: 10px;
+}
+
+.contact-card input,
+.contact-card select {
+  width: 100%;
+  padding: 9px 10px;
+  margin-bottom: 10px;
+  border: 1px solid #bfc7d1;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.contact-card input:focus,
+.contact-card select:focus {
+  outline: none;
+  border-color: #6f7f91;
+}
+
+.contact-status {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.card-width {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.edit-actions button {
+  padding: 8px 16px;
+  border: 1px solid #aeb7c2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* EDIT MODE */
+
+.contact-edit-form {
+  max-width: 500px;
+}
+
+.contact-edit-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.contact-edit-field label {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.contact-edit-field input,
+.contact-edit-field select {
+  padding: 7px 9px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.edit-actions button {
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.contact-details-view {
+  padding: 20px;
+}
+
+.contact-detail-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 12px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.contact-detail-label {
+  font-weight: 600;
+  color: #444;
+}
+
+.contact-status {
+  margin-top: 14px;
+  margin-bottom: 10px;
+}
+
+.card-width {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 14px;
+}
+
+.edit-contact {
+  padding: 6px 14px;
+  border: 1px solid #aeb7c2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+
+  margin: 10px 0;
+  padding: 7px 12px;
+
+  border: 1px solid #aeb7c2;
+  border-radius: 5px;
+
+  background-color: #f5f6f7;
+  color: #333;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-link:hover {
+  background-color: #e4e9ef;
 }

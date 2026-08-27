@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { type ContactCardProps } from "./types";
 
 const ContactCard = ({
@@ -8,10 +9,13 @@ const ContactCard = ({
   return (
     <div className="contact-card">
       <div>
-        <strong>{contact.name}</strong>
+        <NavLink to={`/contacts/${contact.id}`}>
+          <strong>{contact.name}</strong>
+        </NavLink>
       </div>
 
       <div>{contact.email}</div>
+      <div>{contact.role}</div>
 
       <div>{contact.favorite ? "⭐ Favorited" : "☆ Not Favorited"}</div>
 
