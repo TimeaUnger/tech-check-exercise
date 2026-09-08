@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import type { Contact } from "../types";
 
 const useContacts = () => {
@@ -34,7 +34,7 @@ const useContacts = () => {
     fetchContacts();
   }, []);
 
-  const deleteContact = async (id: string) => {
+  const deleteContact = useCallback(async (id: string) => {
     setError(null);
 
     try {
@@ -54,7 +54,7 @@ const useContacts = () => {
         setError("Something went wrong");
       }
     }
-  };
+  },[]);
 
   const addContact = async (newContact: Contact) => {
     setError(null);
@@ -84,7 +84,7 @@ const useContacts = () => {
     
   };
 
-  const toggleFavorite = async (id: string) => {
+  const toggleFavorite = useCallback(async (id: string) => {
     setError(null);
 
     const contact = contacts.find((contact) => contact.id === id);
@@ -120,7 +120,7 @@ const useContacts = () => {
         setError("Something went wrong");
       }
     }
-  };
+  },[contacts]);
 
   return {
     contacts,

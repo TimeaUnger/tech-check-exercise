@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo, useMemo } from "react";
 import { type ContactListProps } from "./types";
 import ContactCard from "./ContactCard";
 
@@ -7,15 +7,18 @@ const ContactList = ({
   handleToggleFavorite,
   handleDelete,
 }: ContactListProps) => {
+
   const [search, setSearch] = useState<string>("");
 
   const handleSearch = (value: string) => {
     setSearch(value);
   };
 
-  const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredContacts = useMemo(() => {
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(search.toLowerCase()),
+    );
+  }, [contacts, search]);
 
   return (
     <div className="contact-manager">
@@ -40,4 +43,4 @@ const ContactList = ({
   );
 };
 
-export default ContactList;
+export default memo(ContactList);
