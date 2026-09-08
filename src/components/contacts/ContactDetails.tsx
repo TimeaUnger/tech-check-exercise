@@ -1,13 +1,23 @@
 import { Link } from "react-router-dom";
-import type { Contact, ContactDetailsProps, Role } from "./types";
-import { useState, useLayoutEffect, useRef } from "react";
+import type { ContactDetailsProps, Role } from "./types";
+import { useState, useLayoutEffect, useRef, useReducer  } from "react";
 import useContact from "./hooks/useContact";
+import {
+  contactEditReducer,
+  initialState,
+} from "./reducers/contactEditReducer";
 
 const ContactDetails = ({ contactID }: ContactDetailsProps) => {
+
   const [cardWidth, setCardWidth] = useState<number>(0);
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isEditing, setIsEditing] = useState<boolean>(false);
-  const [editContact, setEditContact] = useState<Contact | null>(null);
+
+  const [editState, dispatch] = useReducer(
+    contactEditReducer,
+    initialState
+  );
+
+  const { isEditing, editContact } = editState;
 
   const { contactDetails, loading, error, updateContact } =
     useContact(contactID);
@@ -27,18 +37,27 @@ const ContactDetails = ({ contactID }: ContactDetailsProps) => {
     const updatedContact = await updateContact(editContact);
     if (!updatedContact) return;
 
-    setEditContact(null);
-    setIsEditing(false);
+    dispatch({
+      type: "SAVE_SUCCESS"
+    })
+
   };
 
   const handleEdit = () => {
-    setIsEditing(true);
-    setEditContact(contactDetails);
+
+    if (!contactDetails) return;
+
+    dispatch({
+      type: "START_EDIT",
+      payload: contactDetails
+    })
   };
 
   const handleCancelEdit = () => {
-    setIsEditing(false);
-    setEditContact(null);
+
+    dispatch ({
+      type: "CANCEL_EDIT"
+    })
   };
 
   if (loading) {
@@ -66,9 +85,14 @@ const ContactDetails = ({ contactID }: ContactDetailsProps) => {
             <input
               value={editContact.name}
               onChange={(e) =>
-                setEditContact({
-                  ...editContact,
-                  name: e.target.value,
+
+                dispatch({
+                  type: "UPDATE_CONTACT",
+                  payload: {
+                    ...editContact,
+                    name: e.target.value,
+
+                  }
                 })
               }
             />
@@ -79,9 +103,14 @@ const ContactDetails = ({ contactID }: ContactDetailsProps) => {
             <input
               value={editContact.email}
               onChange={(e) =>
-                setEditContact({
-                  ...editContact,
-                  email: e.target.value,
+
+                dispatch({
+                  type: "UPDATE_CONTACT",
+                  payload: {
+                    ...editContact,
+                    email: e.target.value,
+
+                  }
                 })
               }
             />
@@ -91,9 +120,13 @@ const ContactDetails = ({ contactID }: ContactDetailsProps) => {
             <select
               value={editContact.role}
               onChange={(e) =>
-                setEditContact({
-                  ...editContact,
-                  role: e.target.value as Role,
+
+                dispatch({
+                  type: "UPDATE_CONTACT",
+                  payload: {
+                    ...editContact,
+                    role: e.target.value as Role,
+                  }
                 })
               }
             >
