@@ -24,6 +24,14 @@ const Header = () => {
             </NavLink>
           </li>
           <li>Projects</li>
+          <li>
+            <NavLink
+              to="/examples"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
+              Examples
+            </NavLink>
+          </li>
           <li>Tasks</li>
           <li>Settings</li>
         </ul>
